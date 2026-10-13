@@ -15,6 +15,6 @@ export default defineConfig({
   server: {
     // No `npm run dev:web`, as chamadas da página vão para o servidor AdonisJS
     // ("/sorteio" também cobre "/sorteios")
-    proxy: { '/sorteio': API, '/api': API },
+    proxy: { '/sorteio': API, '/api': API, '/auth': API },
   },
 })

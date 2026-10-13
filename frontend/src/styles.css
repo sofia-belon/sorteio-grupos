@@ -56,4 +56,16 @@ button:disabled { opacity: .6; cursor: wait; }
   padding: 48px 16px; text-align: center; color: var(--muted);
   border: 2px dashed var(--border); border-radius: 12px;
 }
+.topo { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.usuario { display: flex; align-items: center; gap: 12px; color: var(--muted); font-size: .9rem; }
+button.secundario {
+  width: auto; padding: 6px 14px; background: transparent; color: var(--text);
+  border: 1px solid var(--border); font-weight: 600;
+}
+.login { max-width: 400px; padding-top: 12vh; }
+.login h1 { font-size: 1.6rem; }
+.login .sub { margin-bottom: 20px; }
+.abas { display: flex; gap: 4px; margin-bottom: 12px; padding: 4px; border-radius: 10px; background: var(--border); }
+.abas button { padding: 8px; background: transparent; color: var(--muted); font-weight: 600; }
+.abas button.ativa { background: var(--card); color: var(--text); }
 @keyframes entrar { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }

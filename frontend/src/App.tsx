@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { PARTICIPANTES, TAMANHO_GRUPO, type ResultadoSorteio } from '../../app/shared/sorteio'
-import { buscarUltimoSorteio, sortear } from './api'
+import type { Usuario } from '../../app/shared/usuario'
+import { buscarUltimoSorteio, buscarUsuarioLogado, sair, sortear } from './api'
 import Formulario from './components/Formulario'
+import Login from './components/Login'
 import Resultado from './components/Resultado'
 
 function lerNomes(texto: string) {
@@ -12,6 +14,35 @@ function lerNomes(texto: string) {
 }
 
 export default function App() {
+  // undefined = ainda verificando o login; null = ninguém logado
+  const [usuario, setUsuario] = useState<Usuario | null | undefined>(undefined)
+
+  useEffect(() => {
+    buscarUsuarioLogado()
+      .then(setUsuario)
+      .catch(() => setUsuario(null))
+  }, [])
+
+  async function handleSair() {
+    await sair()
+    setUsuario(null)
+  }
+
+  if (usuario === undefined) {
+    return null
+  }
+  if (usuario === null) {
+    return <Login onEntrar={setUsuario} />
+  }
+  return <Sorteio usuario={usuario} onSair={handleSair} />
+}
+
+interface SorteioProps {
+  usuario: Usuario
+  onSair: () => void
+}
+
+function Sorteio({ usuario, onSair }: SorteioProps) {
   const [nomes, setNomes] = useState(PARTICIPANTES.join('\n'))
   const [tamanho, setTamanho] = useState(String(TAMANHO_GRUPO))
   const [resultado, setResultado] = useState<ResultadoSorteio | null>(null)
@@ -39,7 +70,15 @@ export default function App() {
 
   return (
     <main>
-      <h1>Sorteio de Grupos</h1>
+      <header className="topo">
+        <h1>Sorteio de Grupos</h1>
+        <div className="usuario">
+          <span>{usuario.nome}</span>
+          <button type="button" className="secundario" onClick={onSair}>
+            Sair
+          </button>
+        </div>
+      </header>
       <p className="sub">Digite os participantes, escolha o tamanho dos grupos e clique em sortear.</p>
 
       <div className="layout">
