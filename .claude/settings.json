@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;$env:Path\"; node bin/server.js)",
+      "PowerShell(Start-Sleep 4; try { \\(Invoke-WebRequest http://localhost:3333 -UseBasicParsing\\).StatusCode } catch { $_.Exception.Message })",
+      "PowerShell(try { \\(Invoke-WebRequest http://localhost:3333/sorteio -UseBasicParsing\\).Content } catch { $_.Exception.Message }; Get-Content \"C:\\\\Users\\\\SOFIA~1.BEL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-sofia-belon-sorteio-grupos\\\\c9e3835c-19fd-44b2-8424-f7e46270cf5a\\\\tasks\\\\bz9jqje50.output\" -Tail 20)",
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;$env:Path\"; Set-Location C:\\\\Users\\\\sofia.belon\\\\sorteio-grupos; npm.cmd run typecheck; if \\($?\\) { npm.cmd run build }; if \\($?\\) { Set-Location build; npm.cmd ci --omit=dev --no-audit --no-fund; Copy-Item ..\\\\.env .env })",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3333 -State Listen -ErrorAction SilentlyContinue | ForEach-Object { Get-Process -Id $_.OwningProcess | Select-Object Id,ProcessName,Path }; Get-CimInstance Win32_Process -Filter \"Name='node.exe'\" | Select-Object ProcessId,CommandLine)",
+      "PowerShell(Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue | Where-Object { $_.OwningProcess -in 24304,13220 } | Select-Object LocalAddress,LocalPort,OwningProcess; Get-CimInstance Win32_Process -Filter \"ProcessId=13220\" | Select-Object -ExpandProperty CommandLine)",
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;$env:Path\"; npm.cmd run build; if \\($?\\) { Set-Location build; npm.cmd ci --omit=dev --no-audit --no-fund; Copy-Item ..\\\\.env .env; Set-Location .. })",
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;$env:Path\"; Set-Location C:\\\\Users\\\\sofia.belon\\\\sorteio-grupos\\\\build; node bin/server.js)",
+      "PowerShell(Start-Sleep 4; $r = Invoke-WebRequest http://localhost:3333 -UseBasicParsing; \"$\\($r.StatusCode\\) $\\($r.Headers['Content-Type']\\)\"; \\($r.Content -split \"`n\" | Select-String 'nomes.value =|<title>'\\).Line; $p = Invoke-WebRequest http://localhost:3333/sorteio -Method POST -ContentType 'application/json' -Body '{\"participantes\":[\"A\",\"B\",\"C\",\"D\"],\"tamanho\":2}' -UseBasicParsing; $p.Content)",
+      "PowerShell(Get-Content \"C:\\\\Users\\\\SOFIA~1.BEL\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-sofia-belon-sorteio-grupos\\\\c9e3835c-19fd-44b2-8424-f7e46270cf5a\\\\tasks\\\\bcuxkm5gu.output\" -Tail 30; \"---\"; Get-NetTCPConnection -LocalPort 3333 -ErrorAction SilentlyContinue | Select-Object LocalAddress,State,OwningProcess; try { \\(Invoke-WebRequest http://localhost:3333 -UseBasicParsing -TimeoutSec 5\\).StatusCode } catch { $_.Exception.Message })",
+      "PowerShell(try { \\(Invoke-WebRequest http://127.0.0.1:3333 -UseBasicParsing -TimeoutSec 5\\).StatusCode } catch { \"127.0.0.1 falhou: \" + $_.Exception.Message }; Get-Content .env)",
+      "PowerShell(Start-Process -FilePath \"C:\\\\Users\\\\sofia.belon\\\\sorteio-grupos\\\\iniciar.bat\"; Start-Sleep 5; foreach \\($u in 'http://localhost:3333','http://127.0.0.1:3333','http://[::1]:3333'\\) { try { \"$u -> \" + \\(Invoke-WebRequest $u -UseBasicParsing -TimeoutSec 5\\).StatusCode } catch { \"$u -> FALHOU: \" + $_.Exception.Message } })"
+    ]
+  }
+}

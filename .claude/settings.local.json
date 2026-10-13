@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;$env:Path\"; node -v; npm.cmd run build)",
+      "PowerShell($env:Path = \"C:\\\\Program Files\\\\nodejs;$env:Path\"; Set-Location build; npm.cmd ci --omit=dev; Copy-Item ..\\\\.env .env)"
+    ]
+  }
+}
